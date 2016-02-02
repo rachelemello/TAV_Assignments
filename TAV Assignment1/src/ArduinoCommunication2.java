@@ -1,5 +1,5 @@
 
-public class ArduinoCommunication {
+public class ArduinoCommunication2 {
 	public String inputBuffer= "";
 	public String outputBuffer = "";
 	
@@ -116,7 +116,7 @@ public class ArduinoCommunication {
 	public boolean readErrorDetection(String s) {
 		int expectedLen = 32;
 		String torqueDel = "*t0*";
-		String speedDel = "*s0*";
+		String speedDel = "*v0*";
 		if (s.length() != expectedLen) {
 			return true;
 		} else if (s.indexOf(torqueDel) == -1 || s.indexOf(speedDel) == -1) {
