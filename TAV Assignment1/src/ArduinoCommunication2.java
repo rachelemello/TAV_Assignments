@@ -18,17 +18,16 @@ public class ArduinoCommunication2 {
 	// Method 4 in the assignment
 	// I return the error codes as strings because I need to return the read message as well
 	public String[] readFromOutputBuffer(int n) {
-		String error = "8";
-		String[] result = new String[2];
-		if (n < 0) {
-			result[0] = error;
-			result[1] = "";
-		} else {
-			String bitsRead = outputBuffer.substring(0,n);
-			result[0] = "0";
-			result[1] = bitsRead;
+		String error = "8";									// Error code for this method (negativeN & positiveNTooBig)
+		String[] result = new String[2];					// Storing what will be returned from this method (negativeN & positiveNTooBig & positiveNInRange)
+		if (n < 0 || n > outputBuffer.length()) {			// Check if N is outside accepted range (negativeN & positiveNTooBig)
+			result[0] = error;								// Add error code (negativeN & positiveNTooBig)
+			result[1] = "";									// Empty string as "read" (negativeN & positiveNTooBig)
+		} else {											// N is in range (positiveNInRange)
+			result[0] = "0";								// Add error code (positiveInRange)
+			result[1] = outputBuffer.substring(0,n);		// Read N bits from buffer and add to result (positiveInRange)
 		}
-		return result;
+		return result;										// (negativeN & positiveNTooBig & positiveNInRange)
 	}
 	
 	
