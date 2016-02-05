@@ -11,32 +11,49 @@ public class WriteToInputBufferTest {
 	public void cleanBuffer() {
 		tester.setBuffer("");
 	}
-
+	
+       /*
+	* First test tries to write the inputBuffer by passing a negative int (-1) 	
+	* as parameter n and also s is tested with values "hello", "", "" respectively in that order.
+	* Test should return 5 which is the error code. Buffer should empty. 
+	*/
 	@Test
 	public void negativeNShouldFail() {
-		assertEquals("n = -1, s not empty, must fail", 5, tester.writeToInputBuffer(-1, "hello"));
+		assertEquals("n = -1, s not empty, must fail", 5, tester.writeToInputBuffer(-1, "hello")); // n=-1, s= "hello"
 		assertEquals("buffer must be empty", "", tester.getBuffer());
 		
-		tester.setBuffer("");
-		assertEquals("n = -1, s empty, must fail", 5, tester.writeToInputBuffer(-1, ""));
+		tester.setBuffer(""); // seting empty buffer
+		assertEquals("n = -1, s empty, must fail", 5, tester.writeToInputBuffer(-1, ""));// n=-1, s= ""
 		assertEquals("buffer must be empty", "", tester.getBuffer());
 		
 		tester.setBuffer("hello");
-		assertEquals("n = -1, s empty, must fail", 5, tester.writeToInputBuffer(-1, ""));
+		assertEquals("n = -1, s empty, must fail", 5, tester.writeToInputBuffer(-1, ""));// n=-1, s= ""
 		assertEquals("buffer must be same as before", "hello", tester.getBuffer());
 		
 	}
 	
+	/*
+	* The test tries to write the inputBuffer by passing an int value	
+	* as parameter n where n > s.length(). s is set to values "hello", "", "" respectively in that order
+	* throughout the test.
+	* Test should return 5 which is the error code. Buffer should be empty. 
+	*/
 	@Test
 	public void nGreaterThanSLengthShouldFail() {
-		assertEquals("n = 30, s = \"hello\" must fail", 5, tester.writeToInputBuffer(30, "hello"));
+		assertEquals("n = 30, s = \"hello\" must fail", 5, tester.writeToInputBuffer(30, "hello"));// n=30, s= "hello"
 		assertEquals("buffer must be empty", "", tester.getBuffer());
 		
 		tester.setBuffer("");
-		assertEquals("n = 30, s empty must fail", 5, tester.writeToInputBuffer(30, ""));
+		assertEquals("n = 30, s empty must fail", 5, tester.writeToInputBuffer(30, ""));// n=30, s= ""
 		assertEquals("buffer must be empty", "", tester.getBuffer());
 	}
 	
+	/*
+	* The test tries to write the inputBuffer by passing an int value	
+	* as parameter n where n = 101 (n > 100).
+	* s = "1234567890qwertyuiopasdfghjkl1234567890qwertyuiopasdfghjkl1234567890qwertyuiopasdfghjkl1234567890qwertyuiopasdfghjkl1234567890qwertyuiopasdfghjkl"
+	* Test should return 5 which is the error code. Buffer should be empty. 
+	*/
 	@Test
 	public void tooLargeNShouldFail() {
 		String veryLongString = "1234567890qwertyuiopasdfghjkl";
@@ -46,18 +63,25 @@ public class WriteToInputBufferTest {
 		assertEquals("buffer must be empty", "", tester.getBuffer());
 	}
 	
+	/*
+	* The test tries to write the inputBuffer by passing an int value	
+	* as parameter n where n <= s.length(), n is tested with the values 3,3,o respectively  in that order
+	* s is set to value "hello", throughout the test.
+	* 
+	* Test should return 0. Buffer should be updated, see comments in method. 
+	*/
 	@Test
 	public void confirmationTest() {
-		assertEquals("n = 3, s = \"hello\" must succeed with empty buffer", 0, tester.writeToInputBuffer(3, "hello"));
-		assertEquals("buffer must be \"hel\"", "hel", tester.getBuffer());
+		assertEquals("n = 3, s = \"hello\" must succeed with empty buffer", 0, tester.writeToInputBuffer(3, "hello"));// n = 3, s = "hello"
+		assertEquals("buffer must be \"hel\"", "hel", tester.getBuffer()); //check buffer, should be "hel"
 		
-		tester.setBuffer("hello");
-		assertEquals("n = 3, s = \"hello\" must succeed with unempty buffer", 0, tester.writeToInputBuffer(3, "hello"));
-		assertEquals("buffer must be \"hellohel\"", "hellohel", tester.getBuffer());
+		tester.setBuffer("hello"); // set buffer to "hello"
+		assertEquals("n = 3, s = \"hello\" must succeed with unempty buffer", 0, tester.writeToInputBuffer(3, "hello"));// n = 3, s = "hello"
+		assertEquals("buffer must be \"hellohel\"", "hellohel", tester.getBuffer()); //check buffer, should be "hellohel"
 		
-		tester.setBuffer("");
-		assertEquals("n = 0, s = \"hello\" must succeed, with empty buffer", 0, tester.writeToInputBuffer(0, "hello"));
-		assertEquals("buffer must be \"\"", "", tester.getBuffer());
+		tester.setBuffer("");//Set buffer empy
+		assertEquals("n = 0, s = \"hello\" must succeed, with empty buffer", 0, tester.writeToInputBuffer(0, "hello"));// n = 3, s = ""
+		assertEquals("buffer must be \"\"", "", tester.getBuffer()); //check buffer, should be empty
 		
 	}
 
