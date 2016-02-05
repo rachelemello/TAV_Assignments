@@ -1,4 +1,3 @@
-
 public class ArduinoCommunication {
 	private String buffer;
 	
