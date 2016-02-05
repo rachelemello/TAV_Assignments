@@ -71,8 +71,8 @@ public class ReadSpeedTorqueTest {
 	@Test
 	public void validationTest() {
 		int[] result = new int[2];
-		result[0] = 170;
-		result[1] = 0;
+		result[0] = Integer.parseInt(number1,2);
+		result[1] = Integer.parseInt(number2,2);
 		tester.setBuffer(sDel+vDel+number1+tDel+number2+eDel);
 		assertArrayEquals("buffer is valid should succeed", result, tester.readSpeedTorque());
 	}

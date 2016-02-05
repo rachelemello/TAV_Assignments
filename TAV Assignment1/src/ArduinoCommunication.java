@@ -76,7 +76,7 @@ public class ArduinoCommunication {
 			} else {
 				int[] result = new int[2];
 				result[0] = Integer.parseInt(stream.substring(48, 56), 2);
-				result[1] = Integer.parseInt(stream.substring(70, 78), 2);
+				result[1] = Integer.parseInt(stream.substring(80, 88), 2);
 				return result; //Action a2
 			}
 		}
