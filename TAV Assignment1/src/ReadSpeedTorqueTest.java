@@ -19,7 +19,6 @@ public class ReadSpeedTorqueTest {
 	
 	
 	
-	
 	@Before
 	public void cleanBuffer() {
 		tester.setBuffer("");
@@ -55,7 +54,7 @@ public class ReadSpeedTorqueTest {
 		error[1] = -1;
 		
 		tester.setBuffer(vDel+number1+tDel+number2+eDel);
-		assertEquals("buffer is missing start delimiter should fail", error, tester.readSpeedTorque());
+		assertArrayEquals("buffer is missing start delimiter should fail", error, tester.readSpeedTorque());
 		
 	}
 	
@@ -66,7 +65,7 @@ public class ReadSpeedTorqueTest {
 		error[1] = -1;
 		
 		tester.setBuffer(sDel+vDel+number1+tDel+number2);
-		assertEquals("buffer is missing end delimiter should fail", error, tester.readSpeedTorque());
+		assertArrayEquals("buffer is missing end delimiter should fail", error, tester.readSpeedTorque());
 	}
 	
 	@Test
@@ -75,7 +74,7 @@ public class ReadSpeedTorqueTest {
 		result[0] = 170;
 		result[1] = 0;
 		tester.setBuffer(sDel+vDel+number1+tDel+number2+eDel);
-		assertEquals("buffer is valid should succeed", result, tester.readSpeedTorque());
+		assertArrayEquals("buffer is valid should succeed", result, tester.readSpeedTorque());
 	}
 
 }
