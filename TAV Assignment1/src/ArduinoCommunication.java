@@ -1,6 +1,10 @@
 
 public class ArduinoCommunication {
 	private String buffer;
+	private String sDel = "001010100111001100101010";
+	private String eDel = "001010100110010100101010";
+	private String vDel = "001010100111011000101010";
+	private String tDel = "001010100111010000101010";
 	
 	//Constructor: sets the buffer to empty
 	public ArduinoCommunication(){
@@ -28,6 +32,45 @@ public class ArduinoCommunication {
 			s = s.substring(0, n);
 			buffer = buffer + s; //a3
 			return 0; //a1
+		}
+	}
+	
+	// Helper method for the readSpeedTorque
+	public boolean isPackageOk(String s) {
+		int expectedLength = 112;
+		if (s.indexOf(vDel) == -1) { //Condition c3.1
+		return false; //Action a2
+		} else if (s.indexOf(tDel) == -1) { //Condition c3.2
+			return false; //Action a2
+		} else if (s.length() != expectedLength) { //Condition c3.3
+			return false; //Action a2
+		}
+		return true;
+	}
+	
+	
+	// Method 2 in the assignment
+	public int[] readSpeedTorque () {
+		int[] error = new int[2];
+		error[0] = -1;
+		error[1] = -1;
+		
+		int start = buffer.indexOf(sDel);
+		int end = buffer.indexOf(eDel);
+		if (start == -1) { //Condition c1
+			return error; //Action a3
+		} else if (end == -1) { //Condition c2
+			return error; //Action a3
+		} else {
+			String stream = buffer.substring(start, end+24); //Action a1
+			if (!isPackageOk(stream)) { //Condition c3
+				return error; //Action a3
+			} else {
+				int[] result = new int[2];
+				result[0] = Integer.parseInt(stream.substring(48, 56), 2);
+				result[1] = Integer.parseInt(stream.substring(70, 78), 2);
+				return result; //Action a2
+			}
 		}
 	}
 	
