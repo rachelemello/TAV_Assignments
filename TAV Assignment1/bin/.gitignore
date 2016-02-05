@@ -1,8 +1,7 @@
-/ReadSpeedAndTorqueTest
 /ArduinoCommunication.class
 /ArduinoCommunication2.class
 /DTBSTestCases.class
 /ReadFromOutputBufferTest.class
-/Sendsensordata.class
-/WriteToInputBufferTest.class
 /ReadSpeedAndTorqueTest.class
+/ReadSpeedTorqueTest.class
+/WriteToInputBufferTest.class
