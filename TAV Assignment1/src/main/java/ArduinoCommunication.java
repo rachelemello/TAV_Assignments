@@ -88,6 +88,7 @@ public class ArduinoCommunication {
 		} else {								// N is in range (positiveNInRange)
 			result[0] = "0";					// Add error code (positiveInRange)
 			result[1] = buffer.substring(0,n);	// Read N bits from buffer and add to result (positiveInRange)
+			setBuffer(buffer.substring(n));		// Sets the buffer to be what is left after after reading (removeNBits)
 		}
 		return result;							// (negativeN & positiveNTooBig & positiveNInRange)
 	}
