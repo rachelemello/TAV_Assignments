@@ -1,5 +1,3 @@
-package bitstreamtest;
-
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -15,42 +13,42 @@ public class DTBSTestCases {
 	
 	@Test
 	public void dtbs1() {
-		Sendsensordata junit = new Sendsensordata();
+		ArduinoCommunication junit = new ArduinoCommunication();
 		String result = junit.build_bitstream(-1, 0, 0);
 		assertEquals("Error: Bad T", result);
 	}
 	
 	@Test
 	public void dtbs2() {
-		Sendsensordata junit = new Sendsensordata();
+		ArduinoCommunication junit = new ArduinoCommunication();
 		String result = junit.build_bitstream(0, -1, 0);
 		assertEquals("Error: Bad U", result);
 	}
 	
 	@Test
 	public void dtbs3() {
-		Sendsensordata junit = new Sendsensordata();
+		ArduinoCommunication junit = new ArduinoCommunication();
 		String result = junit.build_bitstream(0, 0, -1);
 		assertEquals("Error: Bad I", result);
 	}
 	
 	@Test
 	public void dtbs4() {
-		Sendsensordata junit = new Sendsensordata();
+		ArduinoCommunication junit = new ArduinoCommunication();
 		String result = junit.build_bitstream(256, 0, 0);
 		assertEquals("Error: Bad T", result);
 	}
 	
 	@Test
 	public void dtbs5() {
-		Sendsensordata junit = new Sendsensordata();
+		ArduinoCommunication junit = new ArduinoCommunication();
 		String result = junit.build_bitstream(0, 256, 0);
 		assertEquals("Error: Bad U", result);
 	}
 	
 	@Test
 	public void dtbs6() {
-		Sendsensordata junit = new Sendsensordata();
+		ArduinoCommunication junit = new ArduinoCommunication();
 		String result = junit.build_bitstream(0, 0, 256);
 		assertEquals("Error: Bad I", result);
 	}
@@ -66,7 +64,7 @@ public class DTBSTestCases {
 		String us = String.format("%8s", Integer.toBinaryString(u)).replace(' ', '0');
 		String is = String.format("%8s", Integer.toBinaryString(i)).replace(' ', '0');
 		
-		Sendsensordata junit = new Sendsensordata();
+		ArduinoCommunication junit = new ArduinoCommunication();
 		
 		String result = junit.build_bitstream(t, u, i);
 		
@@ -86,7 +84,7 @@ public class DTBSTestCases {
 		String us = String.format("%8s", Integer.toBinaryString(u)).replace(' ', '0');
 		String is = String.format("%8s", Integer.toBinaryString(i)).replace(' ', '0');
 		
-		Sendsensordata junit = new Sendsensordata();
+		ArduinoCommunication junit = new ArduinoCommunication();
 		
 		String result = junit.build_bitstream(t, u, i);
 		
@@ -106,7 +104,7 @@ public class DTBSTestCases {
 		String us = String.format("%8s", Integer.toBinaryString(u)).replace(' ', '0');
 		String is = String.format("%8s", Integer.toBinaryString(i)).replace(' ', '0');
 		
-		Sendsensordata junit = new Sendsensordata();
+		ArduinoCommunication junit = new ArduinoCommunication();
 		
 		String result = junit.build_bitstream(t, u, i);
 		
