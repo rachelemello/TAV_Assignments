@@ -68,22 +68,23 @@ public class ArduinoCommunication2 {
 	}
 	
 	
-	// Method 2 in the assignment
+// Method 2 in the assignment
 	// In case of errors found I return [-1, -1]
 	public int[] readSpeedAndTorque() {
 		int[] result = new int[2];
 		int[] error = new int[2];
 		error[0] = -1;
 		error[1] = -1;
-		int startIndx = outputBuffer.indexOf("*s0*");
-		
+		//int startIndx = outputBuffer.indexOf("*s0*");
+		int startIndx = outputBuffer.indexOf("00101010011100110011000000101010");
 		// If the starting delimiter isn't there, error
 		if (startIndx == -1) {
 			return error;
 			
 		} else {
 			outputBuffer = outputBuffer.substring(startIndx); //cut away what is before the package start
-			int endIndx = outputBuffer.indexOf("*e0*");
+			//int endIndx = outputBuffer.indexOf("*e0*");
+			int endIndx = outputBuffer.indexOf("00101010011001010011000000101010");
 			
 			// Use the read method written before
 			String[] bitsRead = readFromOutputBuffer(endIndx-startIndx);
@@ -95,8 +96,8 @@ public class ArduinoCommunication2 {
 				
 			} else {
 				// Parsing the string
-				String binSpeed = outputBuffer.substring(4, 12);
-				String binToque = outputBuffer.substring(16, 24);
+				String binSpeed = outputBuffer.substring(64, 72);
+				String binToque = outputBuffer.substring(104, 112);
 				int speed = Integer.parseInt(binSpeed, 2);
 				int torque = Integer.parseInt(binToque, 2);
 				result[0] = speed;
@@ -113,18 +114,22 @@ public class ArduinoCommunication2 {
 	//  * delimiters should be there
 	// Returns true if an error is detected
 	public boolean readErrorDetection(String s) {
-		int expectedLen = 32;
-		String torqueDel = "*t0*";
-		String speedDel = "*v0*";
+		int expectedLen = 112;
+		//String torqueDel = "*t0*";
+		//String speedDel = "*v0*";
+		String torqueDel = "00101010011101000011000000101010";
+		String speedDel = "00101010011101100011000000101010";
 		if (s.length() != expectedLen) {
+			System.out.println("Lenght is: " + s.length()+ " Should be: " + expectedLen);
+			
 			return true;
 		} else if (s.indexOf(torqueDel) == -1 || s.indexOf(speedDel) == -1) {
+			System.out.println("torqueDel or speedDel is -1");
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
