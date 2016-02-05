@@ -14,42 +14,42 @@ public class DTBSTestCases {
 	@Test
 	public void dtbs1() {
 		ArduinoCommunication junit = new ArduinoCommunication();
-		String result = junit.build_bitstream(-1, 0, 0);
+		String result = junit.sendSensorData(-1, 0, 0);
 		assertEquals("Error: Bad T", result);
 	}
 	
 	@Test
 	public void dtbs2() {
 		ArduinoCommunication junit = new ArduinoCommunication();
-		String result = junit.build_bitstream(0, -1, 0);
+		String result = junit.sendSensorData(0, -1, 0);
 		assertEquals("Error: Bad U", result);
 	}
 	
 	@Test
 	public void dtbs3() {
 		ArduinoCommunication junit = new ArduinoCommunication();
-		String result = junit.build_bitstream(0, 0, -1);
+		String result = junit.sendSensorData(0, 0, -1);
 		assertEquals("Error: Bad I", result);
 	}
 	
 	@Test
 	public void dtbs4() {
 		ArduinoCommunication junit = new ArduinoCommunication();
-		String result = junit.build_bitstream(256, 0, 0);
+		String result = junit.sendSensorData(256, 0, 0);
 		assertEquals("Error: Bad T", result);
 	}
 	
 	@Test
 	public void dtbs5() {
 		ArduinoCommunication junit = new ArduinoCommunication();
-		String result = junit.build_bitstream(0, 256, 0);
+		String result = junit.sendSensorData(0, 256, 0);
 		assertEquals("Error: Bad U", result);
 	}
 	
 	@Test
 	public void dtbs6() {
 		ArduinoCommunication junit = new ArduinoCommunication();
-		String result = junit.build_bitstream(0, 0, 256);
+		String result = junit.sendSensorData(0, 0, 256);
 		assertEquals("Error: Bad I", result);
 	}
 	
@@ -66,7 +66,7 @@ public class DTBSTestCases {
 		
 		ArduinoCommunication junit = new ArduinoCommunication();
 		
-		String result = junit.build_bitstream(t, u, i);
+		String result = junit.sendSensorData(t, u, i);
 		
 		String expected = start_del + tval_del + ts + uval_del + us + ival_del + is + end_del; 
 		
@@ -86,7 +86,7 @@ public class DTBSTestCases {
 		
 		ArduinoCommunication junit = new ArduinoCommunication();
 		
-		String result = junit.build_bitstream(t, u, i);
+		String result = junit.sendSensorData(t, u, i);
 		
 		String expected = start_del + tval_del + ts + uval_del + us + ival_del + is + end_del; 
 		
@@ -106,7 +106,7 @@ public class DTBSTestCases {
 		
 		ArduinoCommunication junit = new ArduinoCommunication();
 		
-		String result = junit.build_bitstream(t, u, i);
+		String result = junit.sendSensorData(t, u, i);
 		
 		String expected = start_del + tval_del + ts + uval_del + us + ival_del + is + end_del; 
 		System.out.println(expected);

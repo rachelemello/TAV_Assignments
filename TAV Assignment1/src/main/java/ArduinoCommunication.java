@@ -93,7 +93,7 @@ public class ArduinoCommunication {
 		return result;							// (negativeN & positiveNTooBig & positiveNInRange)
 	}
 	
-	public String build_bitstream(int t, int u, int i){
+	public String sendSensorData(int t, int u, int i){
 		if(t<0 || t>255){
 			return "Error: Bad T";
 		}
