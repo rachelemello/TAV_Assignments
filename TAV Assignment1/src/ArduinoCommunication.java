@@ -1,14 +1,10 @@
 
 public class ArduinoCommunication {
 	private String buffer;
-	
-	// Delimiter values for build_bitstream (with torque, udistance, infradistance)
-	private final String start_del = "001010100111001100101010"; // *s*
-	private final String tval_del = "001010100111010000101010"; // *t*
-	private final String uval_del = "001010100111010100101010"; // *u*
-	private final String ival_del = "001010100110100100101010"; // *i*
-	private final String end_del = "001010100110010100101010"; // *e*
-		
+	private String sDel = "001010100111001100101010";
+	private String eDel = "001010100110010100101010";
+	private String vDel = "001010100111011000101010";
+	private String tDel = "001010100111010000101010";
 	
 	//Constructor: sets the buffer to empty
 	public ArduinoCommunication(){
@@ -38,25 +34,46 @@ public class ArduinoCommunication {
 			return 0; //a1
 		}
 	}
-		
-	public String build_bitstream(int t, int u, int i){
-		if(t<0 || t>255){
-			return "Error: Bad T";
+	
+	// Helper method for the readSpeedTorque
+	public boolean isPackageOk(String s) {
+		int expectedLength = 112;
+		if (s.indexOf(vDel) == -1) { //Condition c3.1
+		return false; //Action a2
+		} else if (s.indexOf(tDel) == -1) { //Condition c3.2
+			return false; //Action a2
+		} else if (s.length() != expectedLength) { //Condition c3.3
+			return false; //Action a2
 		}
-		if(u<0 || u>255){
-			return "Error: Bad U";
+		return true;
+	}
+	
+	
+	// Method 2 in the assignment
+	public int[] readSpeedTorque () {
+		int[] error = new int[2];
+		error[0] = -1;
+		error[1] = -1;
+		
+		int start = buffer.indexOf(sDel);
+		int end = buffer.indexOf(eDel);
+		if (start == -1) { //Condition c1
+			return error; //Action a3
+		} else if (end == -1) { //Condition c2
+			return error; //Action a3
+		} else {
+			String stream = buffer.substring(start, end+24); //Action a1
+			if (!isPackageOk(stream)) { //Condition c3
+				return error; //Action a3
+			} else {
+				int[] result = new int[2];
+				result[0] = Integer.parseInt(stream.substring(48, 56), 2);
+				result[1] = Integer.parseInt(stream.substring(70, 78), 2);
+				return result; //Action a2
+			}
 		}
-		if(i<0 || i>255){
-			return "Error: Bad I";
-		}
-		
-		String ts = String.format("%8s", Integer.toBinaryString(t)).replace(' ', '0');
-		String us = String.format("%8s", Integer.toBinaryString(u)).replace(' ', '0');
-		String is = String.format("%8s", Integer.toBinaryString(i)).replace(' ', '0');
-		
-		String bitstream = start_del + tval_del + ts + uval_del + us + ival_del + is + end_del;
-		
-		return bitstream;
-	}	
+	}
+	
+	
 
 }
