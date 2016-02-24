@@ -4,6 +4,41 @@ import java.awt.GridLayout;
 import javax.swing.*;
 
 public class SimpleUI {
+	
+	// Constructor for testing
+	public SimpleUI(){
+	}
+	
+	/* 
+	 * Helper method: checks if a given string s represents an integer.
+	 * Return true if it does, false otherwise
+	 */
+	private boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    return true;
+	}
+	/*
+	 * This method checks that the values inputed by the user for torque, US distance
+	 * and IR distance are valid, i.e. they are all non-empty strings representing
+	 * an integer.
+	 * The method returns true if they are, false otherwise.
+	 */
+	public boolean areInputsInts(String t, String u, String i) {
+		if (t.length() == 0 || u.length() == 0 || i.length() == 0) {
+			return false;
+		} else if (!(isInteger(t) & isInteger(u) & isInteger(i))) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 
 	public static void main(String s[]) {
 		
@@ -21,6 +56,11 @@ public class SimpleUI {
 
 		}
 
+	
+	/*
+	 * METHODS TO CREATE THE GUI PANELS, GRIDS, BUTTONS, LABELS, ETC.
+	 * NO LOGIC HERE.
+	 */
 	private static void setFrameParameters(JFrame frame) {
 		frame.setSize(700, 400);;
 
