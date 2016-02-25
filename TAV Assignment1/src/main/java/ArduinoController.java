@@ -7,25 +7,32 @@ public class ArduinoController{
 	private int[] speedTorque;
 	ArduinoCommunication AC = new ArduinoCommunication();
 
-	public void main(String s[]){
-		
+	public static void main(String s[]){
+		System.out.print("Class started");
+		 
+	}
+	public void threadSendJob(){
 		 Timer twoSec = new Timer();
 		 twoSec.scheduleAtFixedRate(new TimerTask() {
 		        @Override
 		         public void run(){
 		        		if(t != -1 || u != -1 || i != -1){
 		        			AC.sendSensorData(t, u, i);
+		        			System.out.println("Send sensor data SUCCESS!\n");
 		        		}else{
 		        			System.out.println("Send sensor data FAILED!\n");
 		        		}
 		         }
 		 },0,2000);
-
-		 Timer oneSec = new Timer();
+	}
+	
+	public void threadReceiveData(){
+		Timer oneSec = new Timer();
 		 oneSec.scheduleAtFixedRate(new TimerTask() {
 		        @Override
 		         public void run(){
 		             speedTorque = AC.readSpeedTorque();
+		             System.out.println("Receive Speed&Torque SUCCESS!\n");
 		         }
 		 },0,1000);
 	}
@@ -33,11 +40,9 @@ public class ArduinoController{
    public void setU(int u){
 	   this.u = u;
    }
-   
    public void setI(int i){
 	   this.i = i;
    }
-   
    public void setT(int t){
 	   this.t = t;
    }
