@@ -11,7 +11,9 @@ public class SimpleUITest {
 	String integer = "208"; //some string representing an int
 	String floatNum = "3.6"; //some string representing a floating number
 	
-	// Test cases for method areInputsInts()
+	// ------------------------------------- //
+	// TEST CASES FOR METHOD: areInputsInts()
+	// ------------------------------------- //
 	
 	/* In this test one of the parameters (i, meaning the IR distance) is an empty 
 	 * String (as if the user left the field empty). 
@@ -41,5 +43,14 @@ public class SimpleUITest {
 	@Test
 	public void validationTest() {
 		assertEquals("t, u, i are all strings representing integers should return true", true, tester.areInputsInts(integer, integer, integer));
+	}
+	
+	// ------------------------------------- //
+	// TEST CASES FOR METHOD: displayError()
+	// ------------------------------------- //
+	@Test
+	public void errorDispValidationTest() {
+		SimpleUI.displayError("an error");
+		assertEquals("error = \"an error\" updates the error display correctly", "an error", SimpleUI.errorsDisplay.getText());
 	}
 }

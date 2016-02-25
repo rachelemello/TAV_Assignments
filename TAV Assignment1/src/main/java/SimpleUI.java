@@ -5,15 +5,57 @@ import javax.swing.*;
 
 public class SimpleUI {
 	
+	public static JButton send;
+	public static Listener l = new Listener();
+	public static JTextField t;
+	public static JTextField u;
+	public static JTextField i;
+	public static JTextArea errorsDisplay;
+	public static JTextArea sentDisplay;
+	public static JTextArea receivedDisplay;
+	public static String sentDisplayText;
+	public static String receivedDisplayText;
+	public static String errorsDisplayText;
+	public static JButton startStop;
+	
 	// Constructor for testing
 	public SimpleUI(){
 	}
+	
+	/*
+	 * Method to display an error message in the errors display of the UI.
+	 */
+	public static void displayError(String error) {
+		errorsDisplayText = error;
+		errorsDisplay.setText(errorsDisplayText);
+	}
+	
+	/*
+	 * Method to display sent values on the Sent display. Each new call of the method
+	 * only adds the information about the new sent values, without cleaning
+	 * the info already there.
+	 */
+	public static void displaySentData(String t, String u, String i) {
+		sentDisplayText += "\ntorque: "+t +"\nUS distance: "+u +"\nIR distance: "+i+"\n";
+		sentDisplay.setText(sentDisplayText);
+	}
+	
+	/*
+	 * Method to display received values on the Receive display. Each new call of 
+	 * the method only adds the information about the new sent values, without 
+	 * cleaning the info already there.
+	 */
+	public static void displayReceivedData(String s, String t){
+		receivedDisplayText += "\nspeed: " + s + "\ntorque: " + t + "\n";
+		receivedDisplay.setText(receivedDisplayText);
+	}
+	
 	
 	/* 
 	 * Helper method: checks if a given string s represents an integer.
 	 * Return true if it does, false otherwise
 	 */
-	private boolean isInteger(String s) {
+	private static boolean isInteger(String s) {
 	    try { 
 	        Integer.parseInt(s); 
 	    } catch(NumberFormatException e) { 
@@ -29,7 +71,7 @@ public class SimpleUI {
 	 * an integer.
 	 * The method returns true if they are, false otherwise.
 	 */
-	public boolean areInputsInts(String t, String u, String i) {
+	public static boolean areInputsInts(String t, String u, String i) {
 		if (t.length() == 0 || u.length() == 0 || i.length() == 0) {
 			return false;
 		} else if (!(isInteger(t) & isInteger(u) & isInteger(i))) {
@@ -81,8 +123,9 @@ public class SimpleUI {
         JLabel empty3 = new JLabel("");
         JLabel empty4 = new JLabel("");
               
-        JButton startStop = new JButton();  
+        startStop = new JButton();  
         startStop.setText("Start/Stop");
+        startStop.addActionListener(l);
 
         bottom.add(empty3);
         bottom.add(startStop);
@@ -102,32 +145,43 @@ public class SimpleUI {
         middle.add(middleL);
         middle.add(middleR);
         
-        middleL.setLayout(new GridLayout(3,2));
+        middleL.setLayout(new GridLayout(3,3));
         middleR.setLayout(new GridLayout(2,1));
         
-        JTextField sendtorque = new JTextField("input torque");
-        JTextField sendir = new JTextField("input ir");
-        JTextField sendur = new JTextField("input ur");
+        t = new JTextField();
+        u = new JTextField();
+        i = new JTextField();
         
-        JTextArea displaySent = new JTextArea("display sent values", 20, 25);
-        JScrollPane scrollPaneSent = new JScrollPane(displaySent);
-		displaySent.setEditable(false);
+        JLabel inputT = new JLabel("Input torque:");
+        JLabel inputU = new JLabel("Input US distance:");
+        JLabel inputI = new JLabel("Input IR distance:");
+        
+        sentDisplayText = "Sent values:\n";
+        sentDisplay = new JTextArea(sentDisplayText, 20, 25);
+        JScrollPane scrollPaneSent = new JScrollPane(sentDisplay);
+		sentDisplay.setEditable(false);
 		
-		JTextArea displayReceived = new JTextArea("display received values", 20, 25);
-	    JScrollPane scrollPaneReceived = new JScrollPane(displayReceived);
-	    displayReceived.setEditable(false);
+		receivedDisplayText = "Received values:\n";
+		receivedDisplay = new JTextArea(receivedDisplayText, 20, 25);
+	    JScrollPane scrollPaneReceived = new JScrollPane(receivedDisplay);
+	    receivedDisplay.setEditable(false);
 	    
-	    JButton send = new JButton();
+	    send = new JButton();
 	    send.setText("Send values");
+	    send.addActionListener(l);
        
         JLabel empty1 = new JLabel("");
         JLabel empty2 = new JLabel("");
         
-        middleL.add(sendtorque);
+        
+        middleL.add(inputT);
+        middleL.add(t);
         middleL.add(empty1);
-        middleL.add(sendur);
+        middleL.add(inputU);
+        middleL.add(u);
         middleL.add(send);
-        middleL.add(sendir);
+        middleL.add(inputI);
+        middleL.add(i);
         middleL.add(empty2);
         
         middleR.add(scrollPaneSent);
@@ -137,9 +191,9 @@ public class SimpleUI {
 	private static void createTopPanel(JPanel main) {
 		JPanel top = new JPanel();
         main.add(top);
-		JTextArea errors = new JTextArea("Errors display", 5, 50);
-		JScrollPane scrollPaneError = new JScrollPane(errors);
-		errors.setEditable(false);
+		errorsDisplay = new JTextArea("Errors display", 5, 50);
+		JScrollPane scrollPaneError = new JScrollPane(errorsDisplay);
+		errorsDisplay.setEditable(false);
         top.add(scrollPaneError);
 	}
 
