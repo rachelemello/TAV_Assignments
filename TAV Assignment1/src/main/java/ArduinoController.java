@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class ArduinoController{
-	private static int t; // KEEP INITIAL VALUES to -1 SO WE DONT SEND
+	private static int t; 
 	private static int u; 
 	private static int i;
 	private static int[] speedTorque;
@@ -9,18 +9,17 @@ public class ArduinoController{
 	private static boolean oneSecStarted;
 	ArduinoCommunication AC;
 	
-	public ArduinoController(){
-		AC = new ArduinoCommunication();
-		t=-1;
+	public ArduinoController(USB usb){
+		AC = new ArduinoCommunication(usb);
+		t=-1; // KEEP INITIAL VALUES to -1 SO WE DONT SEND
 		i=-1;
 		u=-1;
-		twoSecStarted = false;
+		twoSecStarted = false; // Thread is not started
 		oneSecStarted = false;
 	}
 
-	public static void main(String s[]){
-		 
-	}
+	// Starts a timed thread that runs every 2 seconds and sends sensor data 
+	// Uses a method from ArduinoCommunication
 	public void threadSendJob(){
 		if(!twoSecStarted){
 			setIsRunningSendJob();
@@ -30,7 +29,7 @@ public class ArduinoController{
 			        public void run(){
 			       		if(getT() != -1 || getU() != -1 || getI() != -1){
 			       			AC.sendSensorData(getT(), getU(), getI());
-			       			System.out.println("Send sensor data SUCCESS!\n");
+			       			//System.out.println("Send sensor data SUCCESS!\n");
 			       		}else{
 			       			throw new IllegalArgumentException("Send sensor data FAILED!");
 			       		}
@@ -42,6 +41,8 @@ public class ArduinoController{
 		}
 	}
 	
+	// Starts a timed thread that runs every 1 seconds and receives speed and torque data 
+	// Uses a method from ArduinoCommunication
 	public void threadReceiveData(){
 		if(!oneSecStarted){
 			setIsRunningReceiveData();
@@ -58,25 +59,12 @@ public class ArduinoController{
 		}
 			
 	}
-	
-   public void setU(int u){
-	   this.u = u;
-   }
-   public void setI(int i){
-	   this.i = i;
-   }
-   public void setT(int t){
-	   this.t = t;
-   }
+
    public void setTUI(String t, String u, String i) {
 	   this.t = Integer.parseInt(t);
 	   this.u = Integer.parseInt(u);
 	   this.i = Integer.parseInt(i);
    }
-   public void printstuff(){
-	   System.out.println("t = " + t + "\nu = " + u + "\ni = " + i);
-   }
-   
    public int getT(){
 	   return this.t;
    }

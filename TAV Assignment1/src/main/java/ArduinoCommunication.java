@@ -1,5 +1,7 @@
 public class ArduinoCommunication {
-	private String buffer;
+	private String inBuffer;
+	private String outBuffer;
+	private USB usb;
 	
 	// Delimiter values for bitstream packs
 	private final String sDel = "001010100111001100101010"; // *s*
@@ -9,17 +11,22 @@ public class ArduinoCommunication {
 	private final String uDel = "001010100111010100101010"; // *u*
 	private final String iDel = "001010100110100100101010"; // *i*
 	
-	//Constructor: sets the buffer to empty
+	//Constructor: sets the inBuffer to empty
+	public ArduinoCommunication(USB usb){
+		this.inBuffer = "";
+		this.usb = usb;
+	}
+	
 	public ArduinoCommunication(){
-		this.buffer = "";
+		this.inBuffer = "";
 	}
 	
-	public String getBuffer(){
-		return this.buffer;
+	public String getInBuffer(){
+		return this.inBuffer;
 	}
 	
-	public void setBuffer(String buffer) {
-		this.buffer = buffer;
+	public void setInBuffer(String buffer) {
+		this.inBuffer = buffer;
 	}
 	
 	// Method 3 in the assignment
@@ -33,7 +40,7 @@ public class ArduinoCommunication {
 			return error; //a2
 		} else {
 			s = s.substring(0, n);
-			buffer = buffer + s; //a3
+			inBuffer = inBuffer + s; //a3
 			return 0; //a1
 		}
 	}
@@ -54,18 +61,26 @@ public class ArduinoCommunication {
 	
 	// Method 2 in the assignment
 	public int[] readSpeedTorque () {
+		
+		//get data from odroid mock and save the data to the inBuffer
+		
+		String buffer = usb.readSpeedTorque();
+		System.out.printf("String is %s\n",buffer);
+		
+		setInBuffer(buffer);
+		
 		int[] error = new int[2];
 		error[0] = -1;
 		error[1] = -1;
 		
-		int start = buffer.indexOf(sDel);
-		int end = buffer.indexOf(eDel);
+		int start = inBuffer.indexOf(sDel);
+		int end = inBuffer.indexOf(eDel);
 		if (start == -1) { //Condition c1
 			return error; //Action a3
 		} else if (end == -1) { //Condition c2
 			return error; //Action a3
 		} else {
-			String stream = buffer.substring(start, end+24); //Action a1
+			String stream = inBuffer.substring(start, end+24); //Action a1
 			if (!isPackageOk(stream)) { //Condition c3
 				return error; //Action a3
 			} else {
@@ -75,6 +90,8 @@ public class ArduinoCommunication {
 				return result; //Action a2
 			}
 		}
+		
+		
 	}
 	
 	// Method 4 in the assignment
@@ -82,13 +99,13 @@ public class ArduinoCommunication {
 	public String[] readFromOutputBuffer(int n) {
 		String error = "8";						// Error code for this method (negativeN & positiveNTooBig)
 		String[] result = new String[2];		// Storing what will be returned from this method (negativeN & positiveNTooBig & positiveNInRange)
-		if (n < 0 || n > buffer.length()) {		// Check if N is outside accepted range (negativeN & positiveNTooBig)
+		if (n < 0 || n > inBuffer.length()) {		// Check if N is outside accepted range (negativeN & positiveNTooBig)
 			result[0] = error;					// Add error code (negativeN & positiveNTooBig)
 			result[1] = "";						// Empty string as "read" (negativeN & positiveNTooBig)
 		} else {								// N is in range (positiveNInRange)
 			result[0] = "0";					// Add error code (positiveInRange)
-			result[1] = buffer.substring(0,n);	// Read N bits from buffer and add to result (positiveInRange)
-			setBuffer(buffer.substring(n));		// Sets the buffer to be what is left after after reading (removeNBits)
+			result[1] = inBuffer.substring(0,n);	// Read N bits from inBuffer and add to result (positiveInRange)
+			setInBuffer(inBuffer.substring(n));		// Sets the inBuffer to be what is left after after reading (removeNBits)
 		}
 		return result;							// (negativeN & positiveNTooBig & positiveNInRange)
 	}
@@ -110,7 +127,9 @@ public class ArduinoCommunication {
 		
 		String bitstream = sDel + tDel + ts + uDel + us + iDel + is + eDel;
 		
-		return bitstream;
+		usb.sendSensorData(bitstream);
+		return "success";
+		
 	}
 
 }

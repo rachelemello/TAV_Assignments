@@ -21,7 +21,7 @@ public class SimpleUITest {
 	 */
 	@Test
 	public void emptyFieldShouldFail() {
-		assertEquals("i is empty string should return false", false, tester.areInputsInts(text, integer, empty));
+		assertEquals("i is empty string should return false", false, SimpleUI.areInputsInts(text, integer, empty));
 	}
 	
 	/* In this test one of the parameters (first torque, then UR distance,
@@ -30,9 +30,9 @@ public class SimpleUITest {
 	 */
 	@Test
 	public void notIntegerParameterShouldFail() {
-		assertEquals("t is a text string should return false", false, tester.areInputsInts(text, integer, floatNum));
-		assertEquals("u is a decimal string should return false", false, tester.areInputsInts(integer, floatNum, text));
-		assertEquals("i is a text string should return false", false, tester.areInputsInts(integer, integer, text));	
+		assertEquals("t is a text string should return false", false, SimpleUI.areInputsInts(text, integer, floatNum));
+		assertEquals("u is a decimal string should return false", false, SimpleUI.areInputsInts(integer, floatNum, text));
+		assertEquals("i is a text string should return false", false, SimpleUI.areInputsInts(integer, integer, text));	
 	}
 	
 	
@@ -42,7 +42,7 @@ public class SimpleUITest {
 	 */
 	@Test
 	public void validationTest() {
-		assertEquals("t, u, i are all strings representing integers should return true", true, tester.areInputsInts(integer, integer, integer));
+		assertEquals("t, u, i are all strings representing integers should return true", true, SimpleUI.areInputsInts(integer, integer, integer));
 	}
 	
 	// ------------------------------------- //
@@ -50,7 +50,7 @@ public class SimpleUITest {
 	// ------------------------------------- //
 	@Test
 	public void errorDispValidationTest() {
-		tester.displayError("an error");
-		assertEquals("error = \"an error\" updates the error display correctly", "an error", tester.errorsDisplay.getText());
+		SimpleUI.displayError("an error");
+		assertEquals("error = \"an error\" updates the error display correctly", "an error", SimpleUI.errorsDisplay.getText());
 	}
 }

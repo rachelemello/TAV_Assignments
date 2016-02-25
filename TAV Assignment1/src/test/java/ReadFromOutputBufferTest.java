@@ -9,7 +9,7 @@ public class ReadFromOutputBufferTest {
 	// Sets the buffer to something just for testing
 	@Before
 	public void setOutputBuffer(){
-		arduino.setBuffer("randomstringfortestingstuff");
+		arduino.setInBuffer("randomstringfortestingstuff");
 	}
 	
 	// Test a negative value, checking that the return value from the method is correct
@@ -41,7 +41,7 @@ public class ReadFromOutputBufferTest {
 	public void removeNBits(){
 		String[] j = arduino.readFromOutputBuffer(5); //Just to have the method run once
 		String expected = "mstringfortestingstuff";
-		String actual = arduino.getBuffer();
+		String actual = arduino.getInBuffer();
 		assertEquals(expected, actual);
 	}
 }

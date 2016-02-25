@@ -3,7 +3,8 @@ import java.awt.event.ActionListener;
 
 public class Listener implements ActionListener{
 	 public void actionPerformed(ActionEvent e){
-		 ArduinoController controller = new ArduinoController();
+		 USBConnection usb = new USBConnection();
+		 ArduinoController controller = new ArduinoController(usb);
 		 Object s = e.getSource();
 		 if (s == SimpleUI.send) { //Send values button...
 			 String t = SimpleUI.t.getText();
@@ -12,7 +13,6 @@ public class Listener implements ActionListener{
 			 boolean validInput = SimpleUI.areInputsInts(t,u,i);
 			 if (validInput){
 				 controller.setTUI(t, u, i);
-				 controller.printstuff();
 				 SimpleUI.errorsDisplay.setText("");
 				 SimpleUI.displaySentData(t, u, i);
 				 System.out.println("Sending...\ntorque: "+t +"\nUS distance: "+u +"\nIR distance: "+i);

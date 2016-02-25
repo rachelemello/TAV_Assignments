@@ -1,8 +1,2 @@
-/ReadSpeedTorqueTest.class
-/SimpleUI.class
-/SimpleUITest.class
-/ArduinoController.class
-/ArduinoController$1.class
-/ArduinoController$2.class
-/Listener.class
-/ArduinoControllerTest.class
+/USBConnectionSendSensorDataTest.class
+/USBConnectionReadSpeedTorqueTest.class
