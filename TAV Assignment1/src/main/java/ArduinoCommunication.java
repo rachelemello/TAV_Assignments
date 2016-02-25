@@ -64,6 +64,7 @@ public class ArduinoCommunication {
 		
 		//get data from odroid mock and save the data to the inBuffer
 		
+
 		String buffer = usb.readSpeedTorque();
 		System.out.printf("String is %s\n",buffer);
 		

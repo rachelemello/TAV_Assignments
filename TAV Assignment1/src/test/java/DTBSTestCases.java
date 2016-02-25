@@ -1,15 +1,25 @@
 import static org.junit.Assert.*;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 public class DTBSTestCases {
 
+	// Used in DTBS 7 8 9 because they actually send the data (as validation succeeds) to the USB object.
+	private static USBConnection mockedUSB;
+	
 	// Delimiter values
 	private final String start_del = "001010100111001100101010"; // *s*
 	private final String tval_del = "001010100111010000101010"; // *t*
 	private final String uval_del = "001010100111010100101010"; // *u*
 	private final String ival_del = "001010100110100100101010"; // *i*
 	private final String end_del = "001010100110010100101010"; // *e*
+	
+	@BeforeClass
+	public static void setUp(){
+		mockedUSB = Mockito.mock(USBConnection.class);
+	}
 	
 	@Test
 	public void dtbs1() {
@@ -64,7 +74,7 @@ public class DTBSTestCases {
 		String us = String.format("%8s", Integer.toBinaryString(u)).replace(' ', '0');
 		String is = String.format("%8s", Integer.toBinaryString(i)).replace(' ', '0');
 		
-		ArduinoCommunication junit = new ArduinoCommunication();
+		ArduinoCommunication junit = new ArduinoCommunication(mockedUSB);
 		
 		String result = junit.sendSensorData(t, u, i);
 		
@@ -84,7 +94,7 @@ public class DTBSTestCases {
 		String us = String.format("%8s", Integer.toBinaryString(u)).replace(' ', '0');
 		String is = String.format("%8s", Integer.toBinaryString(i)).replace(' ', '0');
 		
-		ArduinoCommunication junit = new ArduinoCommunication();
+		ArduinoCommunication junit = new ArduinoCommunication(mockedUSB);
 		
 		String result = junit.sendSensorData(t, u, i);
 		
@@ -104,7 +114,7 @@ public class DTBSTestCases {
 		String us = String.format("%8s", Integer.toBinaryString(u)).replace(' ', '0');
 		String is = String.format("%8s", Integer.toBinaryString(i)).replace(' ', '0');
 		
-		ArduinoCommunication junit = new ArduinoCommunication();
+		ArduinoCommunication junit = new ArduinoCommunication(mockedUSB);
 		
 		String result = junit.sendSensorData(t, u, i);
 		
