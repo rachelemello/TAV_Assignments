@@ -1,4 +1,17 @@
-
+/**
+ * SimpleUI class
+ * 
+ * Public relevant methods:
+ *   * public static void displayError(String error): to display an error message
+ *         in the error display.
+ *         
+ *   * public static void displaySentData(String t, String u, String i): to display
+ *         sent data in the sent data display.
+ *         
+ *   * public static void displayReceivedData(String s, String t): to display
+ *         received data in the received data display.
+ *   
+ */
 import java.awt.GridLayout;
 
 import javax.swing.*;
