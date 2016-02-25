@@ -15,11 +15,41 @@ public class SimpleUI {
 	public static JTextArea receivedDisplay;
 	public static String sentDisplayText;
 	public static String receivedDisplayText;
+	public static String errorsDisplayText;
 	public static JButton startStop;
 	
 	// Constructor for testing
 	public SimpleUI(){
 	}
+	
+	/*
+	 * Method to display an error message in the errors display of the UI.
+	 */
+	public static void displayError(String error) {
+		errorsDisplayText = error;
+		errorsDisplay.setText(errorsDisplayText);
+	}
+	
+	/*
+	 * Method to display sent values on the Sent display. Each new call of the method
+	 * only adds the information about the new sent values, without cleaning
+	 * the info already there.
+	 */
+	public static void displaySentData(String t, String u, String i) {
+		sentDisplayText += "\ntorque: "+t +"\nUS distance: "+u +"\nIR distance: "+i+"\n";
+		sentDisplay.setText(sentDisplayText);
+	}
+	
+	/*
+	 * Method to display received values on the Receive display. Each new call of 
+	 * the method only adds the information about the new sent values, without 
+	 * cleaning the info already there.
+	 */
+	public static void displayReceivedData(String s, String t){
+		receivedDisplayText += "\nspeed: " + s + "\ntorque: " + t + "\n";
+		receivedDisplay.setText(receivedDisplayText);
+	}
+	
 	
 	/* 
 	 * Helper method: checks if a given string s represents an integer.
