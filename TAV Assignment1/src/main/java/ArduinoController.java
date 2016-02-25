@@ -5,6 +5,8 @@ public class ArduinoController{
 	private static int u; 
 	private static int i;
 	private static int[] speedTorque;
+	private static boolean twoSecStarted;
+	private static boolean oneSecStarted;
 	ArduinoCommunication AC;
 	
 	public ArduinoController(){
@@ -12,36 +14,49 @@ public class ArduinoController{
 		t=-1;
 		i=-1;
 		u=-1;
+		twoSecStarted = false;
+		oneSecStarted = false;
 	}
 
 	public static void main(String s[]){
-		System.out.print("Class started");
 		 
 	}
 	public void threadSendJob(){
-		 Timer twoSec = new Timer();
-		 twoSec.scheduleAtFixedRate(new TimerTask() {
-		        @Override
-		         public void run(){
-		        		if(getT() != -1 || getU() != -1 || getI() != -1){
-		        			AC.sendSensorData(getT(), getU(), getI());
-		        			System.out.println("Send sensor data SUCCESS!\n");
-		        		}else{
-		        			System.out.println("Send sensor data FAILED!\n");	
-		        		}
-		         }
-		 },0,2000);
+		if(!twoSecStarted){
+			setIsRunningSendJob();
+			Timer twoSec = new Timer();
+			twoSec.scheduleAtFixedRate(new TimerTask() {
+			       @Override
+			        public void run(){
+			       		if(getT() != -1 || getU() != -1 || getI() != -1){
+			       			AC.sendSensorData(getT(), getU(), getI());
+			       			System.out.println("Send sensor data SUCCESS!\n");
+			       		}else{
+			       			throw new IllegalArgumentException("Send sensor data FAILED!");
+			       		}
+			        }
+			},0,2000);
+		}else{
+			throw new IllegalArgumentException("threadSendJob is already running.");
+			//System.out.println("threadSendJob is already running.");
+		}
 	}
 	
 	public void threadReceiveData(){
-		Timer oneSec = new Timer();
-		 oneSec.scheduleAtFixedRate(new TimerTask() {
-		        @Override
-		         public void run(){
-		             speedTorque = AC.readSpeedTorque();
-		             System.out.println("Receive Speed&Torque SUCCESS!\n");
-		         }
-		 },0,1000);
+		if(!oneSecStarted){
+			setIsRunningReceiveData();
+			Timer oneSec = new Timer();
+			 oneSec.scheduleAtFixedRate(new TimerTask() {
+			        @Override
+			         public void run(){
+			             speedTorque = AC.readSpeedTorque();
+			             System.out.println("Receive Speed&Torque SUCCESS!\n");
+			         }
+			 },0,1000);
+		}else{
+			System.out.println("threadReceiveData is already running.");
+		}
+			
 	}
 	
    public void setU(int u){
@@ -77,6 +92,17 @@ public class ArduinoController{
    }
    public int readTorque(){
 	   return this.speedTorque[1];
+   }
+   public void setIsRunningSendJob(){
+	   this.twoSecStarted = true;
+   }public void setIsRunningReceiveData(){
+	   this.oneSecStarted = true;;
+   }
+   public boolean isThreadSendJobRunning(){
+	   return twoSecStarted;
+   }
+   public boolean isThreadReceiveDataRunning(){
+	   return oneSecStarted;
    }
    
 }
