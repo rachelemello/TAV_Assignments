@@ -5,7 +5,11 @@ public class ArduinoController{
 	private int u = -1; 
 	private int i = -1;
 	private int[] speedTorque;
-	ArduinoCommunication AC = new ArduinoCommunication();
+	ArduinoCommunication AC;
+	
+	public ArduinoController(){
+		AC = new ArduinoCommunication();
+	}
 
 	public static void main(String s[]){
 		System.out.print("Class started");
