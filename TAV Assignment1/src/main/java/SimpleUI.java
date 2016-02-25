@@ -11,6 +11,9 @@ public class SimpleUI {
 	public static JTextField u;
 	public static JTextField i;
 	public static JTextArea errorsDisplay;
+	public static JTextArea sentDisplay;
+	public static JTextArea receivedDisplay;
+	public static String sentDisplayText;
 
 	// Constructor for testing
 	public SimpleUI(){
@@ -120,13 +123,14 @@ public class SimpleUI {
         JLabel inputU = new JLabel("Input US distance:");
         JLabel inputI = new JLabel("Input IR distance:");
         
-        JTextArea displaySent = new JTextArea("display sent values", 20, 25);
-        JScrollPane scrollPaneSent = new JScrollPane(displaySent);
-		displaySent.setEditable(false);
+        sentDisplayText = "Sent values:\n";
+        sentDisplay = new JTextArea(sentDisplayText, 20, 25);
+        JScrollPane scrollPaneSent = new JScrollPane(sentDisplay);
+		sentDisplay.setEditable(false);
 		
-		JTextArea displayReceived = new JTextArea("display received values", 20, 25);
-	    JScrollPane scrollPaneReceived = new JScrollPane(displayReceived);
-	    displayReceived.setEditable(false);
+		receivedDisplay = new JTextArea("display received values", 20, 25);
+	    JScrollPane scrollPaneReceived = new JScrollPane(receivedDisplay);
+	    receivedDisplay.setEditable(false);
 	    
 	    send = new JButton();
 	    send.setText("Send values");

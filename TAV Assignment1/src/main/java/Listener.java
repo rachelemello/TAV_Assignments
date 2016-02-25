@@ -11,6 +11,8 @@ public class Listener implements ActionListener{
 			 boolean validInput = SimpleUI.areInputsInts(t,u,i);
 			 if (validInput){
 				 SimpleUI.errorsDisplay.setText("");
+				 SimpleUI.sentDisplayText += ("\ntorque: "+t +"\nUS distance: "+u +"\nIR distance: "+i+"\n");
+				 SimpleUI.sentDisplay.setText(SimpleUI.sentDisplayText);
 				 System.out.println("Sending...\ntorque: "+t +"\nUS distance: "+u +"\nIR distance: "+i);
 				 //TODO: call to sendSensorData
 			 } else {
