@@ -2,6 +2,8 @@
  * SimpleUI class
  * 
  * Public relevant methods:
+ * 	 * public static void runUI(): starts the UI.
+ * 
  *   * public static void displayError(String error): to display an error message
  *         in the error display.
  *         
@@ -95,7 +97,7 @@ public class SimpleUI {
 	}
 
 
-	public static void main(String s[]) {
+	public static void runUI() {
 		
 		JFrame frame = createFrame();
 		
@@ -109,7 +111,10 @@ public class SimpleUI {
 
         setFrameParameters(frame);
 
-		}
+	}
+	public static void main(String s[]) {
+		runUI();
+	}
 
 	
 	/*
