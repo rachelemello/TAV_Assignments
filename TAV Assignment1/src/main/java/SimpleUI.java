@@ -5,6 +5,9 @@ import javax.swing.*;
 
 public class SimpleUI {
 	
+	public static JButton send;
+	public static Listener l = new Listener();
+
 	// Constructor for testing
 	public SimpleUI(){
 	}
@@ -117,8 +120,9 @@ public class SimpleUI {
 	    JScrollPane scrollPaneReceived = new JScrollPane(displayReceived);
 	    displayReceived.setEditable(false);
 	    
-	    JButton send = new JButton();
+	    send = new JButton();
 	    send.setText("Send values");
+	    send.addActionListener(l);
        
         JLabel empty1 = new JLabel("");
         JLabel empty2 = new JLabel("");
