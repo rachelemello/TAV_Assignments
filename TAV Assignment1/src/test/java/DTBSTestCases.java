@@ -68,7 +68,7 @@ public class DTBSTestCases {
 		
 		String result = junit.sendSensorData(t, u, i);
 		
-		String expected = start_del + tval_del + ts + uval_del + us + ival_del + is + end_del; 
+		String expected = "success"; 
 		
 		assertEquals(expected, result);
 	}
@@ -88,7 +88,7 @@ public class DTBSTestCases {
 		
 		String result = junit.sendSensorData(t, u, i);
 		
-		String expected = start_del + tval_del + ts + uval_del + us + ival_del + is + end_del; 
+		String expected = "success"; 
 		
 		assertEquals(expected, result);
 	}
@@ -108,8 +108,8 @@ public class DTBSTestCases {
 		
 		String result = junit.sendSensorData(t, u, i);
 		
-		String expected = start_del + tval_del + ts + uval_del + us + ival_del + is + end_del; 
-		System.out.println(expected);
+		String expected = "success"; 
+
 		assertEquals(expected, result);
 	}
 	

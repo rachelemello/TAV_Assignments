@@ -6,7 +6,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-
 public class ReadSpeedTorqueTest {
 	
 	private ArduinoController aController;
