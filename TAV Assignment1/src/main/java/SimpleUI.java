@@ -14,7 +14,9 @@ public class SimpleUI {
 	public static JTextArea sentDisplay;
 	public static JTextArea receivedDisplay;
 	public static String sentDisplayText;
-
+	public static String receivedDisplayText;
+	public static JButton startStop;
+	
 	// Constructor for testing
 	public SimpleUI(){
 	}
@@ -91,8 +93,9 @@ public class SimpleUI {
         JLabel empty3 = new JLabel("");
         JLabel empty4 = new JLabel("");
               
-        JButton startStop = new JButton();  
+        startStop = new JButton();  
         startStop.setText("Start/Stop");
+        startStop.addActionListener(l);
 
         bottom.add(empty3);
         bottom.add(startStop);
@@ -128,7 +131,8 @@ public class SimpleUI {
         JScrollPane scrollPaneSent = new JScrollPane(sentDisplay);
 		sentDisplay.setEditable(false);
 		
-		receivedDisplay = new JTextArea("display received values", 20, 25);
+		receivedDisplayText = "Received values:\n";
+		receivedDisplay = new JTextArea(receivedDisplayText, 20, 25);
 	    JScrollPane scrollPaneReceived = new JScrollPane(receivedDisplay);
 	    receivedDisplay.setEditable(false);
 	    
