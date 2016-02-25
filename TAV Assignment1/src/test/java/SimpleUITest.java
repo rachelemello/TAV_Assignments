@@ -50,7 +50,7 @@ public class SimpleUITest {
 	// ------------------------------------- //
 	@Test
 	public void errorDispValidationTest() {
-		SimpleUI.displayError("an error");
-		assertEquals("error = \"an error\" updates the error display correctly", "an error", SimpleUI.errorsDisplay.getText());
+		tester.displayError("an error");
+		assertEquals("error = \"an error\" updates the error display correctly", "an error", tester.errorsDisplay.getText());
 	}
 }
