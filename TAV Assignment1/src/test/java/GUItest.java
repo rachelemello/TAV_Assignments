@@ -17,6 +17,57 @@ private static USBConnection mockedUSB;
 	}
 	
 	@Test
+	public void sendSensorDataFromGUIAreBeingSent() throws InterruptedException{
+		SimpleUI.runUI();
+		
+		int expectedT = 5;
+		int expectedI = 6;
+		int expectedU = 7;
+		
+		SimpleUI.t.setText(Integer.toString(expectedT));
+		SimpleUI.u.setText(Integer.toString(expectedU));
+		SimpleUI.i.setText(Integer.toString(expectedI));
+		
+		SimpleUI.startStop.doClick();
+		
+		Thread.sleep(1000);
+		
+		SimpleUI.send.doClick();
+		
+		Thread.sleep(1000);
+		
+		ArduinoController aController = new ArduinoController(mockedUSB);
+		
+		int actualT = aController.getT();
+		int actualU = aController.getU();
+		int actualI = aController.getI();
+		
+		
+		assertEquals(expectedT,actualT);
+		assertEquals(expectedU,actualU);
+		assertEquals(expectedI,actualI);
+	}
+	
+	
+	@Test
+	public void startThreadSendJobAndThreadReceiveJobFromGUIHaveStarted(){
+		SimpleUI.runUI();
+		
+		SimpleUI.t.setText("5");
+		SimpleUI.u.setText("5");
+		SimpleUI.i.setText("5");
+		
+		SimpleUI.startStop.doClick();
+		
+		ArduinoController aController = new ArduinoController(mockedUSB);
+		boolean actualThreadReceiveDatadRunning = ArduinoController.isThreadReceiveDataRunning();
+		boolean actualThreadSendJobRunning = ArduinoController.isThreadSendJobRunning();
+		
+		assertEquals(true, actualThreadReceiveDatadRunning);
+		assertEquals(true, actualThreadSendJobRunning);
+	}
+	
+	@Test
 	public void displayReceivedDataByReadingSpeedTorqueShouldDisplay(){
 		SimpleUI.runUI();
 		
