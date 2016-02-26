@@ -64,13 +64,13 @@ public class ArduinoController {
 	   ArduinoController.u = Integer.parseInt(u);
 	   ArduinoController.i = Integer.parseInt(i);
    }
-   public int getT(){
+   public static int getT(){
 	   return ArduinoController.t;
    }
-   public int getU(){
+   public static int getU(){
 	   return ArduinoController.u;
    }
-   public int getI(){
+   public static int getI(){
 	   return ArduinoController.i;
    }
    public static void setIsRunningSendJob(){

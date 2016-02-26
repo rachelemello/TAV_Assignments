@@ -24,24 +24,21 @@ private static USBConnection mockedUSB;
 		int expectedI = 6;
 		int expectedU = 7;
 		
-		SimpleUI.t.setText(Integer.toString(expectedT));
-		SimpleUI.u.setText(Integer.toString(expectedU));
-		SimpleUI.i.setText(Integer.toString(expectedI));
-		
 		SimpleUI.startStop.doClick();
 		
 		Thread.sleep(1000);
+		
+		SimpleUI.t.setText(Integer.toString(expectedT));
+		SimpleUI.u.setText(Integer.toString(expectedU));
+		SimpleUI.i.setText(Integer.toString(expectedI));
 		
 		SimpleUI.send.doClick();
 		
 		Thread.sleep(1000);
 		
-		ArduinoController aController = new ArduinoController(mockedUSB);
-		
-		int actualT = aController.getT();
-		int actualU = aController.getU();
-		int actualI = aController.getI();
-		
+		int actualT = ArduinoController.getT();
+		int actualU = ArduinoController.getU();
+		int actualI = ArduinoController.getI();
 		
 		assertEquals(expectedT,actualT);
 		assertEquals(expectedU,actualU);
@@ -59,7 +56,6 @@ private static USBConnection mockedUSB;
 		
 		SimpleUI.startStop.doClick();
 		
-		ArduinoController aController = new ArduinoController(mockedUSB);
 		boolean actualThreadReceiveDatadRunning = ArduinoController.isThreadReceiveDataRunning();
 		boolean actualThreadSendJobRunning = ArduinoController.isThreadSendJobRunning();
 		
