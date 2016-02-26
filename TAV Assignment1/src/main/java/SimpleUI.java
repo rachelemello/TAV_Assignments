@@ -18,7 +18,7 @@ import java.awt.GridLayout;
 
 import javax.swing.*;
 
-public class SimpleUI {
+public abstract class SimpleUI {
 	
 	public static JButton send;
 	public static Listener l = new Listener();
@@ -60,8 +60,9 @@ public class SimpleUI {
 	 * the method only adds the information about the new sent values, without 
 	 * cleaning the info already there.
 	 */
-	public static void displayReceivedData(String s, String t){
-		receivedDisplayText += "\nspeed: " + s + "\ntorque: " + t + "\n";
+	public static void displayReceivedData(int[] values){
+		
+		receivedDisplayText = String.format("\nspeed: %d\ntorque: %d\n", values[0],values[1]);
 		receivedDisplay.setText(receivedDisplayText);
 	}
 	

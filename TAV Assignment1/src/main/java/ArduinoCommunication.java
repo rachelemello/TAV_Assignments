@@ -53,9 +53,10 @@ public class ArduinoCommunication {
 		} else if (s.indexOf(tDel) == -1) { //Condition c3.2
 			return false; //Action a2
 		} else if (s.length() != expectedLength) { //Condition c3.3
-			return false; //Action a2
-		}
+			return false;
+		} else {
 		return true;
+		}
 	}
 	
 	
@@ -91,8 +92,6 @@ public class ArduinoCommunication {
 				return result; //Action a2
 			}
 		}
-		
-		
 	}
 	
 	// Method 4 in the assignment

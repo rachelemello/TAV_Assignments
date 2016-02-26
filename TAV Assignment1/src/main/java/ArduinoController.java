@@ -29,15 +29,9 @@ public class ArduinoController{
 			        public void run(){
 			       		if(getT() != -1 || getU() != -1 || getI() != -1){
 			       			AC.sendSensorData(getT(), getU(), getI());
-			       			//System.out.println("Send sensor data SUCCESS!\n");
-			       		}else{
-			       			throw new IllegalArgumentException("Send sensor data FAILED!");
 			       		}
 			        }
 			},0,2000);
-		}else{
-			throw new IllegalArgumentException("threadSendJob is already running.");
-			//System.out.println("threadSendJob is already running.");
 		}
 	}
 	
@@ -50,13 +44,11 @@ public class ArduinoController{
 			 oneSec.scheduleAtFixedRate(new TimerTask() {
 			        @Override
 			         public void run(){
-			             speedTorque = AC.readSpeedTorque();
-			             System.out.println("Receive Speed&Torque SUCCESS!\n");
+			        	displayReceivedDataByReadingSpeedTorque();
 			         }
 			 },0,1000);
-		}else{
-			System.out.println("threadReceiveData is already running.");
 		}
+		
 			
 	}
 
@@ -74,13 +66,6 @@ public class ArduinoController{
    public int getI(){
 	   return this.i;
    }
-   
-   public int readSpeed(){
-	   return this.speedTorque[0];
-   }
-   public int readTorque(){
-	   return this.speedTorque[1];
-   }
    public void setIsRunningSendJob(){
 	   this.twoSecStarted = true;
    }public void setIsRunningReceiveData(){
@@ -91,6 +76,10 @@ public class ArduinoController{
    }
    public boolean isThreadReceiveDataRunning(){
 	   return oneSecStarted;
+   }
+   
+   public void displayReceivedDataByReadingSpeedTorque(){
+	   SimpleUI.displayReceivedData(AC.readSpeedTorque());
    }
    
 }

@@ -15,6 +15,7 @@ public class USBConnectionReadSpeedTorqueTest {
 		String number1 = "10101010"; // 170
 		String number2 = "00000000"; // 0
 		String number3 = "11111111"; // 255
+		String numberBad = "10110100101"; // BAD LEN for number
 	
 	private static USBConnection mockedUSB;
 	
@@ -94,6 +95,23 @@ public class USBConnectionReadSpeedTorqueTest {
 		
 	}
 	
+	@Test
+	public void testWrongLengthPackage() throws Exception{
+		
+		int[] values = {120,80};
+		int[] results = new int[2];
+		
+		//Package without an end delimiter
+		String corrupt = sDel+vDel+number1+tDel+numberBad+eDel;
+		when(mockedUSB.readSpeedTorque()).thenReturn(corrupt);
+		
+		aController = new ArduinoController(mockedUSB);
+		
+		results = aController.AC.readSpeedTorque();
+		
+		assertArrayEquals(new int[]{-1,-1}, results);
+		
+	}
 
 	private static String build_SpeedTorqueBitstreamString(int speed, int torque){
 		

@@ -3,7 +3,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class SimpleUITest {
-	SimpleUI tester = new SimpleUI();
 	
 	// Variables used in tests:
 	String empty = ""; //empty string
