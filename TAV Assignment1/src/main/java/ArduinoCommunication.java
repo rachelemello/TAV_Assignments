@@ -1,6 +1,5 @@
 public class ArduinoCommunication {
 	private String inBuffer;
-	private String outBuffer;
 	private USB usb;
 	
 	// Delimiter values for bitstream packs

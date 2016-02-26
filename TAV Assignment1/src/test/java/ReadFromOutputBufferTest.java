@@ -39,7 +39,7 @@ public class ReadFromOutputBufferTest {
 	// Test that N bits is removed from the beginning of the buffer, check the buffer
 	@Test
 	public void removeNBits(){
-		String[] j = arduino.readFromOutputBuffer(5); //Just to have the method run once
+		arduino.readFromOutputBuffer(5); //Just to have the method run once
 		String expected = "mstringfortestingstuff";
 		String actual = arduino.getInBuffer();
 		assertEquals(expected, actual);

@@ -1,6 +1,5 @@
 import org.junit.*;
 import org.mockito.*;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.junit.Assert.*;
 
@@ -80,7 +79,6 @@ public class USBConnectionReadSpeedTorqueTest {
 	@Test
 	public void testCorruptPackage() throws Exception{
 		
-		int[] values = {120,80};
 		int[] results = new int[2];
 		
 		//Package without an end delimiter
@@ -97,8 +95,6 @@ public class USBConnectionReadSpeedTorqueTest {
 	
 	@Test
 	public void testWrongLengthPackage() throws Exception{
-		
-		int[] values = {120,80};
 		int[] results = new int[2];
 		
 		//Package without an end delimiter

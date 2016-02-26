@@ -4,7 +4,6 @@ public class ArduinoController{
 	private static int t; 
 	private static int u; 
 	private static int i;
-	private static int[] speedTorque;
 	private static boolean twoSecStarted;
 	private static boolean oneSecStarted;
 	ArduinoCommunication AC;
@@ -53,23 +52,23 @@ public class ArduinoController{
 	}
 
    public void setTUI(String t, String u, String i) {
-	   this.t = Integer.parseInt(t);
-	   this.u = Integer.parseInt(u);
-	   this.i = Integer.parseInt(i);
+	   ArduinoController.t = Integer.parseInt(t);
+	   ArduinoController.u = Integer.parseInt(u);
+	   ArduinoController.i = Integer.parseInt(i);
    }
    public int getT(){
-	   return this.t;
+	   return ArduinoController.t;
    }
    public int getU(){
-	   return this.u;
+	   return ArduinoController.u;
    }
    public int getI(){
-	   return this.i;
+	   return ArduinoController.i;
    }
    public void setIsRunningSendJob(){
-	   this.twoSecStarted = true;
+	   ArduinoController.twoSecStarted = true;
    }public void setIsRunningReceiveData(){
-	   this.oneSecStarted = true;;
+	   ArduinoController.oneSecStarted = true;;
    }
    public boolean isThreadSendJobRunning(){
 	   return twoSecStarted;

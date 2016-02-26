@@ -1,6 +1,3 @@
-import static org.mockito.Mockito.when;
-
-import org.mockito.Mockito;
 
 class USBConnection implements USB {
 	    
