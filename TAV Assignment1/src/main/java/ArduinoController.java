@@ -88,3 +88,4 @@ public class ArduinoController{
    public void displayReceivedDataByReadingSpeedTorque(){
 	   SimpleUI.displayReceivedData(AC.readSpeedTorque());
    }
+}
