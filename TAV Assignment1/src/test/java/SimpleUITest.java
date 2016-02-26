@@ -43,13 +43,4 @@ public class SimpleUITest {
 	public void validationTest() {
 		assertEquals("t, u, i are all strings representing integers should return true", true, SimpleUI.areInputsInts(integer, integer, integer));
 	}
-	
-	// ------------------------------------- //
-	// TEST CASES FOR METHOD: displayError()
-	// ------------------------------------- //
-//	@Test THIS DOES NOT WORK FIX IT OR REMOVE IT
-//	public void errorDispValidationTest() {
-//		SimpleUI.displayError("an error");
-//		assertEquals("error = \"an error\" updates the error display correctly", "an error", SimpleUI.errorsDisplay.getText());
-//	}
 }

@@ -16,23 +16,24 @@ public class ArduinoControllerTest {
 		mockedUSB = Mockito.mock(USBConnection.class);
 	}
 	
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
-	
 	/*
 	 * Below are tests for the method threadSendJob()
 	 */
+	
+	// Checks that the thread is started via a boolean
 	@Test
 	public void threadStarted(){
 		AC = new ArduinoController(mockedUSB);
 		AC.threadSendJob();
 		assertTrue(AC.isThreadSendJobRunning());
 	}
+	// Checks that nothing is sent when either of the sensor values are -1
 	@Test
 	public void dontSend() throws Exception {
 		AC = new ArduinoController(mockedUSB);
 		AC.threadSendJob();
 	}
+	// Checks that the thread has started via a boolean
 	@Test
 	public void startThread(){
 		AC = new ArduinoController(mockedUSB);
@@ -40,6 +41,7 @@ public class ArduinoControllerTest {
 		AC.threadSendJob();
 		assertTrue(AC.isThreadSendJobRunning()); // Thread is running
 	}
+	// Test to check that the thread keeps running every 2 seconds.
 	@Test
 	public void isLooping(){
 		// JUnit doesn't support this
@@ -48,17 +50,15 @@ public class ArduinoControllerTest {
 	/*
 	 * Below are tests for the method threadReceiveData()
 	 */
+	
+	// Checks that the thread is started via a boolean
 	@Test
 	public void threadStarted2(){
 		AC = new ArduinoController(mockedUSB);
 		AC.threadReceiveData();
 		assertTrue(AC.isThreadReceiveDataRunning());
 	}
-//	@Test - WE ALREADY COVERED THIS IN DTBSTestCases and USBConnectionSendSensorDataTest
-//	public void receivedValues(){
-//		AC.threadReceiveData();
-//		assertEquals(expected, actual); Can't set the value coming from ArduinoCommunication maybe mocking?
-//	}
+	// Checks that the thread has started via a boolean
 	@Test
 	public void startThread2(){
 		AC = new ArduinoController(mockedUSB);
@@ -66,6 +66,7 @@ public class ArduinoControllerTest {
 		AC.threadReceiveData();
 		assertTrue(AC.isThreadReceiveDataRunning()); // Thread is running
 	}
+	// Test to check that the thread keeps running every 1 seconds.
 	@Test
 	public void isLooping2(){
 		// JUnit doesn't support this
@@ -74,6 +75,8 @@ public class ArduinoControllerTest {
 	/*
 	 * Below are tests for helper classes
 	 */
+	
+	//Check that the values are actually set with the helper method.
 	@Test
 	public void setSensorValues(){
 		AC = new ArduinoController(mockedUSB);
