@@ -5,7 +5,7 @@ class USBConnection implements USB {
 	
 	@Override
 	public void sendSensorData(String s) {
-		System.out.printf("WE ARE ODROID AND GOT BUFFER %s\n", s);
+		// Do nothing
 	}
 
 	@Override
@@ -21,8 +21,6 @@ class USBConnection implements USB {
 	}
 	
 private String build_SpeedTorqueBitstreamString(int speed, int torque){
-		
-		System.out.printf("The speed %d, The torque %d", speed, torque);
 		
 		String speedString = String.format("%8s", Integer.toBinaryString(speed)).replace(' ', '0');
 		String torqueString = String.format("%8s", Integer.toBinaryString(torque)).replace(' ', '0');
