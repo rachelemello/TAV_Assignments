@@ -10,7 +10,6 @@ class USBConnection implements USB {
 
 	@Override
 	public String readSpeedTorque() {
-		// TODO Auto-generated method stub
 		if(i < 0 || i > 255){
 			i = 0;
 		}

@@ -20,14 +20,21 @@ public class ArduinoController{
 	// Starts a timed thread that runs every 2 seconds and sends sensor data 
 	// Uses a method from ArduinoCommunication
 	public void threadSendJob(){
-		if(!twoSecStarted){
+		if(!ArduinoController.twoSecStarted){
 			setIsRunningSendJob();
 			Timer twoSec = new Timer();
 			twoSec.scheduleAtFixedRate(new TimerTask() {
 			       @Override
 			        public void run(){
 			       		if(getT() != -1 || getU() != -1 || getI() != -1){
-			       			AC.sendSensorData(getT(), getU(), getI());
+			       			String result = AC.sendSensorData(getT(), getU(), getI());
+			       			if(result.equals("success")){
+			       				System.out.println("Sensor data valid, sending it to AC sendsensordata");
+			       			} else {
+			       				SimpleUI.displayError(String.format("Bad input for sensor data: %s", result));
+			       			}
+			       		} else {
+			       			System.out.println("The values are -1");
 			       		}
 			        }
 			},0,2000);
@@ -67,7 +74,8 @@ public class ArduinoController{
    }
    public void setIsRunningSendJob(){
 	   ArduinoController.twoSecStarted = true;
-   }public void setIsRunningReceiveData(){
+   }
+   public void setIsRunningReceiveData(){
 	   ArduinoController.oneSecStarted = true;;
    }
    public boolean isThreadSendJobRunning(){
@@ -80,6 +88,3 @@ public class ArduinoController{
    public void displayReceivedDataByReadingSpeedTorque(){
 	   SimpleUI.displayReceivedData(AC.readSpeedTorque());
    }
-   
-}
-

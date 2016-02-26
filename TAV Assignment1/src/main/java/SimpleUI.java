@@ -143,7 +143,7 @@ public abstract class SimpleUI {
         JLabel empty4 = new JLabel("");
               
         startStop = new JButton();  
-        startStop.setText("Start/Stop");
+        startStop.setText("Start Threads");
         startStop.addActionListener(l);
 
         bottom.add(empty3);

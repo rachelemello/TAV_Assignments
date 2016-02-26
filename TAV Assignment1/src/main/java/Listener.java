@@ -16,13 +16,10 @@ public class Listener implements ActionListener{
 				 SimpleUI.errorsDisplay.setText("");
 				 SimpleUI.displaySentData(t, u, i);
 				 System.out.println("Sending...\ntorque: "+t +"\nUS distance: "+u +"\nIR distance: "+i);
-				 //TODO: call to sendSensorData
 			 } else {
 				 SimpleUI.displayError("ERROR: only integer values accepted!");
 			 } 
 		 } else if (s == SimpleUI.startStop) { //Start button....
-			 System.out.println("Start");
-			 //TODO: call to threads
 			 controller.threadSendJob();
 			 controller.threadReceiveData();
 		 }
