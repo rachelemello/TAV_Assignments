@@ -31,6 +31,7 @@ public class ArduinoController {
 			       			String result = AC.sendSensorData(getT(), getU(), getI());
 			       			if(result.equals("success")){
 			       				System.out.println("Sensor data valid, sending it to AC sendsensordata");
+			       				SimpleUI.displaySentData(Integer.toString(t), Integer.toString(u), Integer.toString(i));
 			       			} else {
 			       				SimpleUI.displayError(String.format("Bad input for sensor data: %s", result));
 			       			}
@@ -76,7 +77,7 @@ public class ArduinoController {
    public static void setIsRunningSendJob(){
 	   System.out.println("We are setting twosecstarted to true");
 	   ArduinoController.twoSecStarted = true;
-	   System.out.printf("tWO SEC IS %B RIGHT AFTER SETTING IT \n", isThreadSendJobRunning());
+	   System.out.printf("TWO SEC IS %B RIGHT AFTER SETTING IT \n", isThreadSendJobRunning());
    }
    public static void setIsRunningReceiveData(){
 	   

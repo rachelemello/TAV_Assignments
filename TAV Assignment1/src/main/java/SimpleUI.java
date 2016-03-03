@@ -62,7 +62,7 @@ public abstract class SimpleUI {
 	 */
 	public static void displayReceivedData(int[] values){
 		
-		receivedDisplayText = String.format("\nspeed: %d\ntorque: %d\n", values[0],values[1]);
+		receivedDisplayText += String.format("\nspeed: %d\ntorque: %d\n", values[0],values[1]);
 		receivedDisplay.setText(receivedDisplayText);
 	}
 	
