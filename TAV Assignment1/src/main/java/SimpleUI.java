@@ -32,6 +32,7 @@ public abstract class SimpleUI {
 	public static String receivedDisplayText;
 	public static String errorsDisplayText;
 	public static JButton startStop;
+	public static boolean started;
 	
 	// Constructor for testing
 	public SimpleUI(){
@@ -99,6 +100,7 @@ public abstract class SimpleUI {
 
 
 	public static void runUI() {
+		started = false;
 		
 		JFrame frame = createFrame();
 		
