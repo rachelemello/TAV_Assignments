@@ -13,21 +13,29 @@ def startGUI():
    '''
     # directory where the java class files of the Matrix application are
    path ="Documents/Studies/VT16/TAV/TAV_Assignments/TAV_Assignments/TAV\ Assignment1/src/main/java/"
-    
+
+   #start terminal
    keyDown(Key.CMD+Key.SPACE)
    keyUp()
    paste("terminal")
    type(Key.ENTER)
    wait(1)
+
+   #clear terminal
    type("k",Key.CMD)
    paste("cd ~")
    type(Key.ENTER)
+
+   # change to correct path
    paste("cd " + path)
    type(Key.ENTER)
+
+   # run GUI
    paste("java SimpleUI")
    type(Key.ENTER)
    wait(1)
 
+   # check that GUI has actually started
    try:
        find(Pattern("1457010314872.png").similar(0.90))
         
@@ -60,6 +68,6 @@ def startT():
     return
     
 
-#startGUI()
+startGUI()
 #enterVals(1,2,3)
 #quitGUI()

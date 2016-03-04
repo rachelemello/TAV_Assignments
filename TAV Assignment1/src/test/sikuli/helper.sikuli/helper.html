@@ -86,20 +86,28 @@
     <span class="cmt"># directory where the java class files of the Matrix application are</span>
    path =<span class="str">"Documents/Studies/VT16/TAV/TAV_Assignments/TAV_Assignments/TAV\ Assignment1/src/main/java/"</span>
 
+   <span class="cmt">#start terminal</span>
    keyDown(Key.CMD+Key.SPACE)
    keyUp()
    paste(<span class="str">"terminal"</span>)
    <span class="skw">type</span>(Key.ENTER)
    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+   <span class="cmt">#clear terminal</span>
    <span class="skw">type</span>(<span class="str">"k"</span>,Key.CMD)
    paste(<span class="str">"cd ~"</span>)
    <span class="skw">type</span>(Key.ENTER)
+
+   <span class="cmt"># change to correct path</span>
    paste(<span class="str">"cd "</span> + path)
    <span class="skw">type</span>(Key.ENTER)
+
+   <span class="cmt"># run GUI</span>
    paste(<span class="str">"java SimpleUI"</span>)
    <span class="skw">type</span>(Key.ENTER)
    <span class="skw">wait</span>(<span class="dig">1</span>)
 
+   <span class="cmt"># check that GUI has actually started</span>
    <span class="kw">try</span>:
        <span class="skw">find</span>(Pattern(<img src="1457010314872.png" />).similar(<span class="dig">0.90</span>))
 
@@ -132,7 +140,7 @@
     <span class="kw">return</span>
 
 
-<span class="cmt">#startGUI()</span>
+startGUI()
 <span class="cmt">#enterVals(1,2,3)</span>
 <span class="cmt">#quitGUI()</span>
 

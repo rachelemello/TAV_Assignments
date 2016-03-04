@@ -2,7 +2,9 @@ from sikuli import *
 
 import helper
 reload(helper)
+
 def run():
+    print "Scenario 2 test\n"
     helper.startGUI()
     helper.startT()
     helper.enterVals('a',2,3)

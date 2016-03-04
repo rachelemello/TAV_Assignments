@@ -67,7 +67,7 @@
    </head>
 <body>
 <div class="info">
-<h2>scenario2_noInts.sikuli</h2> <a href="scenario2_noInts.zip">(Download this script)</a>
+<h2>scenario3_outOfRange.sikuli</h2> <a href="scenario3_outOfRange.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
 <span class="kw">from</span> sikuli <span class="kw">import</span> *
@@ -76,17 +76,36 @@
 reload(helper)
 
 <span class="kw">def</span> run():
-    <span class="kw">print</span> <span class="str">"Scenario 2 test\n"</span>
+    <span class="kw">print</span> <span class="str">"Scenario 3 test\n"</span>
+
+    <span class="cmt">#test 3.1</span>
     helper.startGUI()
     helper.startT()
-    helper.enterVals(<span class="str">'a'</span>,<span class="dig">2</span>,<span class="dig">3</span>)
+    helper.enterVals(<span class="dig">300</span>,<span class="dig">2</span>,<span class="dig">3</span>)
     <span class="skw">click</span>(Pattern(<img src="1457012090425.png" />).similar(<span class="dig">0.90</span>))
+    <span class="skw">wait</span>(<span class="dig">2</span>) <span class="cmt">#it takes a bit before the error is detected</span>
     <span class="kw">try</span>:
-        <span class="skw">find</span>(Pattern(<img src="1457012249180.png" />).similar(<span class="dig">0.90</span>))
+        <span class="skw">find</span>(Pattern(<img src="1457087016077.png" />).similar(<span class="dig">0.90</span>))
     <span class="kw">except</span>:
-        <span class="kw">print</span> <span class="str">"Test for scenario 2 failed!"</span>
+        <span class="kw">print</span> <span class="str">"Test for scenario 3.1 failed!\n"</span>
+        <span class="kw">print</span> <span class="str">"Test for scenario 3 aborted"</span>
         <span class="kw">return</span>
-    <span class="kw">print</span> <span class="str">"Test for scenario 2 succeeded!"</span>
+    <span class="kw">print</span> <span class="str">"Test for scenario 3.1 succeeded!"</span>
+    helper.quitGUI()
+
+    <span class="cmt">#test 3.2</span>
+    helper.startGUI()
+    helper.startT()
+    helper.enterVals(<span class="dig">1</span>,<span class="dig">2</span>,-<span class="dig">5</span>)
+    <span class="skw">click</span>(Pattern(<img src="1457012090425.png" />).similar(<span class="dig">0.90</span>))
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="kw">try</span>:
+        <span class="skw">find</span>(Pattern(<img src="1457087185565.png" />).similar(<span class="dig">0.90</span>))
+    <span class="kw">except</span>:
+        <span class="kw">print</span> <span class="str">"Test for scenario 3.2 failed!"</span>
+        <span class="kw">return</span>
+    <span class="kw">print</span> <span class="str">"Test for scenario 3.2 succeeded!"</span>
+    <span class="kw">return</span>
 
 run()
 </pre>
