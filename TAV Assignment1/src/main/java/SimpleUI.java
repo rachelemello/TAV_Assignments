@@ -100,6 +100,7 @@ public abstract class SimpleUI {
 
 
 	public static void runUI() {
+		System.out.println("System status... " + started);
 		started = false;
 		
 		JFrame frame = createFrame();

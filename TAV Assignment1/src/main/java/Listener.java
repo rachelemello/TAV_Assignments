@@ -7,6 +7,7 @@ public class Listener implements ActionListener{
 		 ArduinoController controller = new ArduinoController(usb);
 		 Object s = e.getSource();
 		 if (s == SimpleUI.send) { //Send values button...
+			 System.out.println("System status... " + SimpleUI.started);
 			 if (!SimpleUI.started) {
 				 SimpleUI.displayError("ERROR: You need to start the threads first!");
 			 } else {
@@ -24,6 +25,8 @@ public class Listener implements ActionListener{
 				 } 
 			 }
 		 } else if (s == SimpleUI.startStop) { //Start button....
+			 SimpleUI.started = true;
+			 System.out.println("System status... " + SimpleUI.started);
 			 controller.threadSendJob();
 			 controller.threadReceiveData();
 		 }
