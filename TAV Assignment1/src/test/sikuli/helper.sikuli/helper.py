@@ -68,6 +68,6 @@ def startT():
     return
     
 
-startGUI()
+#startGUI()
 #enterVals(1,2,3)
 #quitGUI()

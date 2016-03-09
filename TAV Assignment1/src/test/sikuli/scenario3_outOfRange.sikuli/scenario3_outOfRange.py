@@ -24,15 +24,28 @@ def run():
     #test 3.2
     helper.startGUI()
     helper.startT()
+    helper.enterVals(1,876,20)
+    click(Pattern("1457012090425.png").similar(0.90))
+    wait(2)
+    try:
+        find(Pattern("1457535889827.png").similar(0.90))
+    except:
+        print "Test for scenario 3.2 failed!"
+        return
+    print "Test for scenario 3.2 succeeded!"
+    
+    #test 3.3
+    helper.startGUI()
+    helper.startT()
     helper.enterVals(1,2,-5)
     click(Pattern("1457012090425.png").similar(0.90))
     wait(2)
     try:
         find(Pattern("1457087185565.png").similar(0.90))
     except:
-        print "Test for scenario 3.2 failed!"
+        print "Test for scenario 3.3 failed!"
         return
-    print "Test for scenario 3.2 succeeded!"
-    return    
+    print "Test for scenario 3.3 succeeded!"
+    return 
 
 run()
