@@ -118,6 +118,7 @@ public abstract class SimpleUI {
 	}
 	public static void main(String s[]) {
 		runUI();
+		SimUI.runSimUI();
 	}
 
 	

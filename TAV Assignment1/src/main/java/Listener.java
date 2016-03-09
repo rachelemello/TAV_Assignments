@@ -29,6 +29,8 @@ public class Listener implements ActionListener{
 			 System.out.println("System status... " + SimpleUI.started);
 			 controller.threadSendJob();
 			 controller.threadReceiveData();
+		 } else if (s == SimUI.connLoss) {
+			 SimpleUI.displayError("Attention: connection lost!"); 
 		 }
 	 }
 }
